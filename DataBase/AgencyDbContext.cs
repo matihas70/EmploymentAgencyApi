@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.IO;
 
-namespace EmploymentAgencyAPI.DataBase
+namespace EmploymentAgencyApi.DataBase
 {
     public class AgencyDbContext : DbContext
     {

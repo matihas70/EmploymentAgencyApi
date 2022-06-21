@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EmploymentAgencyAPI.DataBase
+namespace EmploymentAgencyApi.DataBase
 {
     public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
     {

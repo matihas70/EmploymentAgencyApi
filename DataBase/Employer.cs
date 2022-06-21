@@ -1,4 +1,4 @@
-﻿namespace EmploymentAgencyAPI.DataBase
+﻿namespace EmploymentAgencyApi.DataBase
 {
     public class Employer
     {
