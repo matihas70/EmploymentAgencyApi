@@ -120,7 +120,8 @@ namespace EmploymentAgencyApi.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_CompanyAddressId",
                 table: "Companies",
-                column: "CompanyAddressId");
+                column: "CompanyAddressId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contracts_CompanyId",
@@ -135,7 +136,8 @@ namespace EmploymentAgencyApi.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Employers_EmployerAddressId",
                 table: "Employers",
-                column: "EmployerAddressId");
+                column: "EmployerAddressId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

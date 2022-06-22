@@ -1,6 +1,6 @@
 ﻿namespace EmploymentAgencyApi.DataBase
 {
-    public abstract class Address
+    abstract public class Address
     {
         public int Id { get; set; }
         public string City { get; set; }

@@ -48,7 +48,8 @@ namespace EmploymentAgencyApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyAddressId");
+                    b.HasIndex("CompanyAddressId")
+                        .IsUnique();
 
                     b.ToTable("Companies");
                 });
@@ -163,7 +164,8 @@ namespace EmploymentAgencyApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployerAddressId");
+                    b.HasIndex("EmployerAddressId")
+                        .IsUnique();
 
                     b.ToTable("Employers");
                 });
@@ -199,8 +201,8 @@ namespace EmploymentAgencyApi.Migrations
             modelBuilder.Entity("EmploymentAgencyApi.DataBase.Company", b =>
                 {
                     b.HasOne("EmploymentAgencyApi.DataBase.CompanyAddress", "Address")
-                        .WithMany()
-                        .HasForeignKey("CompanyAddressId")
+                        .WithOne("Company")
+                        .HasForeignKey("EmploymentAgencyApi.DataBase.Company", "CompanyAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -229,8 +231,8 @@ namespace EmploymentAgencyApi.Migrations
             modelBuilder.Entity("EmploymentAgencyApi.DataBase.Employer", b =>
                 {
                     b.HasOne("EmploymentAgencyApi.DataBase.EmployerAddress", "Address")
-                        .WithMany()
-                        .HasForeignKey("EmployerAddressId")
+                        .WithOne("Employer")
+                        .HasForeignKey("EmploymentAgencyApi.DataBase.Employer", "EmployerAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -242,9 +244,21 @@ namespace EmploymentAgencyApi.Migrations
                     b.Navigation("Contracts");
                 });
 
+            modelBuilder.Entity("EmploymentAgencyApi.DataBase.CompanyAddress", b =>
+                {
+                    b.Navigation("Company")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EmploymentAgencyApi.DataBase.Employer", b =>
                 {
                     b.Navigation("Contracts");
+                });
+
+            modelBuilder.Entity("EmploymentAgencyApi.DataBase.EmployerAddress", b =>
+                {
+                    b.Navigation("Employer")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
