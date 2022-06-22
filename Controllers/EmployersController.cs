@@ -7,10 +7,10 @@ namespace EmploymentAgencyApi.Controllers
     [Route("api/employer")]
     public class EmployersController : Controller
     {
-        private readonly IEmployerService _service;
-        public EmployersController(IEmployerService service)
+        private readonly IEmployerService _employerService;
+        public EmployersController(IEmployerService employerService)
         {
-            _service = service;
+            _employerService = employerService;
         }
 
         [HttpGet]
@@ -22,17 +22,17 @@ namespace EmploymentAgencyApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<EmployerDto> GetEmployer([FromRoute]int id)
         {
-            var employer = _service.GetEmployer(id);
+            var dto = _employerService.GetEmployer(id);
 
-            if(employer == null)
+            if(dto == null)
             {
-                return NotFound();
+                return NotFound("This person don't exist");
             }
 
-            return Ok(employer);
+            return Ok(dto);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult AddEmployer([FromBody] AddEmployerDto dto)
         {
             if (!ModelState.IsValid)
@@ -40,14 +40,29 @@ namespace EmploymentAgencyApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            int id = _service.AddEmployer(dto);
+            int id = _employerService.AddEmployer(dto);
 
             if(id == 0)
             {
                 return BadRequest("Person with this e-mail addres already exist");
             }
+            else if (id == -1)
+            {
+                return BadRequest("Person with this phone number addres already exist");
+            }
 
             return Created($"api/employer/{id}", null);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult RemoveEmployer([FromRoute] int id)
+        {
+            bool result = _employerService.RemoveEmployer(id);
+
+            if(result) return NoContent();
+            
+            return NotFound();
+        }
+
     }
 }

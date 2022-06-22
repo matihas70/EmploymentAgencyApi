@@ -10,6 +10,7 @@ namespace EmploymentAgencyApi.Services
     {
         public int AddEmployer(AddEmployerDto dto);
         public EmployerDto GetEmployer(int id);
+        public bool RemoveEmployer(int id);
     }
 
     public class EmployerService : IEmployerService
@@ -42,6 +43,10 @@ namespace EmploymentAgencyApi.Services
 
             if (emp != null) return 0;
 
+            emp = _dbContext.Employers.FirstOrDefault(e => e.PhoneNumber == dto.PhoneNumber);
+
+            if(emp != null) return -1;
+
             var employer = _mapper.Map<Employer>(dto);
             
             _dbContext.Employers.Add(employer);
@@ -52,5 +57,22 @@ namespace EmploymentAgencyApi.Services
             return id;
         }
 
+        public bool RemoveEmployer(int id)
+        {
+            var employer = _dbContext.Employers
+                .FirstOrDefault(e => e.Id == id);
+
+            if(employer == null) return false;
+
+            var address = _dbContext.EmployerAddresses
+                .FirstOrDefault(a => a.Id == employer.Id);
+
+            _dbContext.Remove(employer);
+            _dbContext.Remove(address);
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }
