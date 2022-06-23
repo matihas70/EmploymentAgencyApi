@@ -86,5 +86,20 @@ namespace EmploymentAgencyApi.Controllers
 
             return NotFound();
         }
+
+        [HttpPut("address/{id}")]
+        public ActionResult UpdateEmployerAddress([FromRoute] int id, [FromBody] UpdateEmployerAddressDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            bool isUpdated = _employerService.UpdateEmployerAddress(id, dto);
+
+            if (isUpdated) return Ok();
+
+            return NotFound();
+        }
     }
 }

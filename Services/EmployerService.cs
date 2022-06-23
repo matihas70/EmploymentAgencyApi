@@ -12,6 +12,7 @@ namespace EmploymentAgencyApi.Services
         public EmployerDto GetEmployer(int id);
         public bool RemoveEmployer(int id);
         public bool UpdateEmployerContact(int id, UpdateEmployerContactDto dto);
+        public bool UpdateEmployerAddress(int id, UpdateEmployerAddressDto dto);
     }
 
     public class EmployerService : IEmployerService
@@ -87,9 +88,24 @@ namespace EmploymentAgencyApi.Services
             employer.Email = dto.Email;
 
             _dbContext.SaveChanges();
+            return true;   
+        }
+
+        public bool UpdateEmployerAddress(int id, UpdateEmployerAddressDto dto)
+        {
+            var employer = _dbContext.Employers
+                .Include(e => e.Address)
+                .FirstOrDefault(e => e.Id == id);
+
+            if (employer == null) return false;
+
+            employer.Address.City = dto.City;
+            employer.Address.Street = dto.Street;
+            employer.Address.PostalCode = dto.PostalCode;
+
+            _dbContext.SaveChanges();
+
             return true;
-            
-            
         }
     }
 }
