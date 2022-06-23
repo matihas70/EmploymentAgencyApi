@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AgencyDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddTransient<IEmployerService, EmployerService>();
+builder.Services.AddTransient<ICompanyService, CompanyService>();
 
 
 var app = builder.Build();
