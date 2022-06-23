@@ -57,12 +57,34 @@ namespace EmploymentAgencyApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult RemoveEmployer([FromRoute] int id)
         {
-            bool result = _employerService.RemoveEmployer(id);
+            bool isDeleted = _employerService.RemoveEmployer(id);
 
-            if(result) return NoContent();
+            if(isDeleted) return NoContent();
             
             return NotFound();
         }
 
+        [HttpPut("contact/{id}")]
+        public ActionResult UpdateEmployerContact([FromRoute] int id, [FromBody] UpdateEmployerContactDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (dto.PhoneNumber == null && dto.Email == null)
+            {
+                return BadRequest();
+            }
+
+            bool isUpdated = _employerService.UpdateEmployerContact(id, dto);
+
+            if (isUpdated)
+            {
+                return Ok();
+            }
+
+            return NotFound();
+        }
     }
 }
