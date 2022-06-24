@@ -26,7 +26,7 @@ namespace EmploymentAgencyApi.Controllers
 
             if(dto == null)
             {
-                return NotFound("This person don't exist");
+                return NotFound("This person doesn't exist");
             }
 
             return Ok(dto);

@@ -14,8 +14,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AgencyDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-builder.Services.AddTransient<IEmployerService, EmployerService>();
-builder.Services.AddTransient<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IEmployerService, EmployerService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IContractService, ContractService>();
 
 
 var app = builder.Build();
