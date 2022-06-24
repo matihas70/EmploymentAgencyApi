@@ -7,6 +7,7 @@ namespace EmploymentAgencyApi.Services
 {
     public interface ICompanyService
     {
+        public CompanyDto GetCompany(int id);
         public int AddCompany(AddCompanyDto dto);
     }
     public class CompanyService : ICompanyService
@@ -18,6 +19,19 @@ namespace EmploymentAgencyApi.Services
         {
             _dbContext = dbContext;
             _mapper = mapper;
+        }
+
+        public CompanyDto GetCompany(int id)
+        {
+            var company = _dbContext.Companies
+                .Include(c => c.Address)
+                .FirstOrDefault(c => c.Id == id);
+
+            if (company == null) return null;
+
+            var dto = _mapper.Map<CompanyDto>(company);
+
+            return dto;
         }
 
         public int AddCompany(AddCompanyDto dto)

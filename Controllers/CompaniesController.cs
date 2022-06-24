@@ -13,6 +13,16 @@ namespace EmploymentAgencyApi.Controllers
             _companyService = companyService;
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<CompanyDto> GetCompany([FromRoute] int id)
+        {
+            var dto = _companyService.GetCompany(id);
+
+            if (dto == null) return NotFound();
+
+            return Ok(dto);
+        }
+
         [HttpPost]
         public ActionResult AddCompany([FromBody] AddCompanyDto dto)
         {

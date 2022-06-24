@@ -4,6 +4,7 @@ namespace EmploymentAgencyApi.Models
 {
     public class AddCompanyDto
     {
+        [Required]
         [MaxLength(40)]
         public string Name { get; set; }
 

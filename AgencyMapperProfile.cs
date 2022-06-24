@@ -38,6 +38,10 @@ namespace EmploymentAgencyApi
                     Street = src.Street,
                     PostalCode = src.PostalCode
                 }));
+
+            CreateMap<Company, CompanyDto>()
+                .ForMember(dst => dst.City, opt => opt.MapFrom(src => src.Address.City))
+                .ForMember(dst => dst.Street, opt => opt.MapFrom(src => src.Address.Street));
         }
    
         private bool isAdultFunction(int age)
