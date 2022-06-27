@@ -1,5 +1,5 @@
 # EmploymentAgencyApi
-Tools: C#/.Net, ASP.NET Core, Entity Framework
+Tools: C#/.Net, ASP.NET Core, Entity Framework </br>
 This project presents API for employment agency. Database was created with Entity framework. Contains three controllers: for employees, companies and contract. Endpoints in each controller:
 1. EmployeesController - Route: api/employee
   - Get: default GET endpoint returns "Hello user"
