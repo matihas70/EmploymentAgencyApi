@@ -75,7 +75,5 @@ namespace EmploymentAgencyApi.DataBase
         {
             optionsBuilder.UseSqlServer(connectionString);
         }
-
-        
     }
 }
