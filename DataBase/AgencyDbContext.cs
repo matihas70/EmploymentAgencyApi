@@ -7,7 +7,7 @@ namespace EmploymentAgencyApi.DataBase
 {
     public class AgencyDbContext : DbContext
     {
-        private const string connectionString = "Server=LAPTOP-SLAGE0DE;Database=EmploymentAgencyDB;Trusted_Connection=True;";
+        private const string connectionString = "Server=LAPTOP-1L2H46R9;Database=EmploymentAgencyDB;Trusted_Connection=True;";
 
         public DbSet<Employer> Employers { get; set; }
         public DbSet<EmployerAddress> EmployerAddresses { get; set; }
